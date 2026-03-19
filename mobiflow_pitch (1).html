@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MobiFlow — Seed Round 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1b2a;
+    --navy2: #162032;
+    --blue: #2563eb;
+    --blue-bright: #3b82f6;
+    --blue-glow: rgba(59,130,246,0.18);
+    --accent: #f59e0b;
+    --green: #10b981;
+    --red: #ef4444;
+    --white: #f8fafc;
+    --muted: #94a3b8;
+    --border: rgba(148,163,184,0.12);
+    --card: rgba(22,32,50,0.7);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw;
+    height: 64px;
+    background: rgba(13,27,42,0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.3s;
+  }
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 1.3rem;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .logo-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--blue-bright); display: inline-block; }
+  nav ul { list-style: none; display: flex; gap: 2rem; }
+  nav ul li a {
+    color: var(--muted); font-size: 0.875rem; text-decoration: none; font-weight: 500;
+    transition: color 0.2s;
+  }
+  nav ul li a:hover { color: var(--white); }
+  .nav-cta {
+    background: var(--blue); color: var(--white) !important;
+    padding: 0.45rem 1.2rem; border-radius: 6px;
+    font-weight: 600 !important;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--blue-bright) !important; color: var(--white) !important; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 120px 5vw 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 60% 40%, rgba(37,99,235,0.22) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 40% at 10% 80%, rgba(245,158,11,0.08) 0%, transparent 60%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(var(--border) 1px, transparent 1px),
+                      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 80%);
+  }
+  .hero-inner {
+    position: relative; z-index: 2;
+    max-width: 820px;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    border: 1px solid rgba(59,130,246,0.35);
+    background: rgba(59,130,246,0.08);
+    color: var(--blue-bright);
+    font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 5px 14px; border-radius: 100px;
+    margin-bottom: 2rem;
+  }
+  .hero-badge::before { content: '●'; font-size: 0.5rem; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.8rem, 6vw, 5.2rem);
+    font-weight: 800;
+    line-height: 1.07;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+  }
+  h1 .accent { color: var(--blue-bright); }
+  h1 .line2 { display: block; color: var(--muted); font-size: 0.55em; font-weight: 600; margin-top: 0.3em; letter-spacing: -0.01em; }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+  .hero-sub strong { color: var(--white); font-weight: 500; }
+
+  .cta-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--blue);
+    color: var(--white);
+    padding: 0.85rem 2rem;
+    border-radius: 8px;
+    font-weight: 600; font-size: 0.95rem;
+    text-decoration: none;
+    border: none; cursor: pointer;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 0 0 0 rgba(59,130,246,0);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: var(--blue-bright); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(59,130,246,0.35); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--white);
+    padding: 0.85rem 2rem;
+    border-radius: 8px;
+    font-weight: 500; font-size: 0.95rem;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-secondary:hover { border-color: rgba(148,163,184,0.4); background: rgba(255,255,255,0.04); }
+
+  .hero-stats {
+    display: flex; gap: 3rem; margin-top: 4rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .hero-stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem; font-weight: 800;
+    color: var(--white);
+    line-height: 1;
+  }
+  .hero-stat-label { color: var(--muted); font-size: 0.8rem; margin-top: 4px; font-weight: 400; }
+
+  /* ── SECTIONS ── */
+  section { padding: 100px 5vw; }
+  .section-label {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--blue-bright);
+    margin-bottom: 1rem;
+  }
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.9rem, 3.5vw, 3rem);
+    font-weight: 800; letter-spacing: -0.025em;
+    line-height: 1.15;
+    margin-bottom: 1.2rem;
+  }
+  .section-sub {
+    color: var(--muted); max-width: 520px;
+    font-size: 1.05rem; line-height: 1.7; font-weight: 300;
+    margin-bottom: 3.5rem;
+  }
+
+  /* ── PROBLEM ── */
+  .problem { background: var(--navy2); }
+  .prob-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+    gap: 1.5px;
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .prob-card {
+    background: var(--card);
+    padding: 2.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.25s;
+  }
+  .prob-card:hover { background: rgba(37,99,235,0.08); }
+  .prob-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  }
+  .prob-card:nth-child(1)::before { background: linear-gradient(90deg, var(--red), transparent); }
+  .prob-card:nth-child(2)::before { background: linear-gradient(90deg, var(--accent), transparent); }
+  .prob-card:nth-child(3)::before { background: linear-gradient(90deg, var(--blue-bright), transparent); }
+
+  .prob-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 3.2rem; font-weight: 800;
+    line-height: 1; margin-bottom: 0.5rem;
+  }
+  .prob-card:nth-child(1) .prob-num { color: var(--red); }
+  .prob-card:nth-child(2) .prob-num { color: var(--accent); }
+  .prob-card:nth-child(3) .prob-num { color: var(--blue-bright); }
+  .prob-desc { color: var(--muted); font-size: 0.92rem; line-height: 1.6; }
+  .prob-desc strong { color: var(--white); }
+
+  /* ── SOLUTION / HOW IT WORKS ── */
+  .solution-layout {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+    align-items: start;
+  }
+  .steps { display: flex; flex-direction: column; gap: 0; }
+  .step {
+    display: flex; gap: 1.5rem;
+    padding: 1.8rem 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .step:last-child { border-bottom: none; }
+  .step-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem; font-weight: 800;
+    color: var(--blue-bright);
+    letter-spacing: 0.08em;
+    width: 28px; flex-shrink: 0; margin-top: 2px;
+  }
+  .step-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem; font-weight: 700;
+    margin-bottom: 0.4rem; color: var(--white);
+  }
+  .step-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.65; }
+
+  .solution-visual {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2.5rem;
+    position: sticky; top: 100px;
+  }
+  .app-mockup {
+    background: var(--navy);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    font-size: 0.85rem;
+  }
+  .mockup-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 1.2rem;
+  }
+  .mockup-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.9rem; }
+  .mockup-badge {
+    background: rgba(16,185,129,0.15); color: var(--green);
+    font-size: 0.7rem; font-weight: 700; padding: 3px 10px; border-radius: 20px;
+    letter-spacing: 0.05em;
+  }
+  .workpod {
+    background: rgba(37,99,235,0.1);
+    border: 1px solid rgba(37,99,235,0.25);
+    border-radius: 10px; padding: 1rem;
+    margin-bottom: 0.8rem;
+  }
+  .workpod-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+  .workpod-name { font-weight: 600; font-size: 0.85rem; }
+  .workpod-route { color: var(--muted); font-size: 0.75rem; }
+  .members { display: flex; gap: 6px; margin-top: 0.6rem; }
+  .avatar {
+    width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.65rem; font-weight: 700; color: var(--white);
+    border: 1.5px solid var(--navy);
+  }
+  .a1{background:#2563eb} .a2{background:#7c3aed} .a3{background:#db2777} .a4{background:#059669}
+  .route-line {
+    display: flex; align-items: center; gap: 6px;
+    color: var(--muted); font-size: 0.75rem;
+    margin-top: 0.7rem;
+  }
+  .route-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue-bright); }
+  .route-line-bar { flex: 1; height: 1px; background: rgba(59,130,246,0.3); }
+  .fare-tag {
+    background: rgba(16,185,129,0.12); color: var(--green);
+    font-size: 0.72rem; font-weight: 700; padding: 2px 8px;
+    border-radius: 4px;
+  }
+
+  /* ── TRACTION ── */
+  .traction { background: var(--navy2); }
+  .metrics-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 14px; overflow: hidden;
+    margin-bottom: 3rem;
+  }
+  .metric-card {
+    background: var(--navy2);
+    padding: 2.2rem 1.8rem;
+    text-align: center;
+    transition: background 0.2s;
+  }
+  .metric-card:hover { background: rgba(37,99,235,0.06); }
+  .metric-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.6rem; font-weight: 800;
+    color: var(--blue-bright);
+    line-height: 1; margin-bottom: 0.4rem;
+  }
+  .metric-label { color: var(--muted); font-size: 0.82rem; }
+  .metric-sub { color: var(--green); font-size: 0.72rem; margin-top: 4px; font-weight: 600; }
+
+  .quotes-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .quote-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.8rem;
+    border-left: 3px solid var(--blue-bright);
+  }
+  .quote-text { font-style: italic; color: var(--muted); font-size: 0.9rem; line-height: 1.65; margin-bottom: 1rem; }
+  .quote-author { font-size: 0.8rem; font-weight: 600; color: var(--white); }
+  .quote-role { color: var(--muted); font-size: 0.75rem; }
+
+  /* ── BUSINESS MODEL ── */
+  .biz-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .biz-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px; padding: 2.2rem;
+    position: relative; overflow: hidden;
+  }
+  .biz-card::after {
+    content: '';
+    position: absolute; top: 0; right: 0;
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    filter: blur(40px);
+    opacity: 0.3;
+  }
+  .biz-card.b2c::after { background: var(--blue-bright); }
+  .biz-card.b2b::after { background: var(--accent); }
+
+  .biz-tag {
+    display: inline-block;
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 4px 12px; border-radius: 20px;
+    margin-bottom: 1.2rem;
+  }
+  .b2c .biz-tag { background: rgba(59,130,246,0.15); color: var(--blue-bright); }
+  .b2b .biz-tag { background: rgba(245,158,11,0.15); color: var(--accent); }
+  .biz-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.3rem; font-weight: 800;
+    margin-bottom: 0.5rem;
+  }
+  .biz-price {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem; font-weight: 800;
+    margin-bottom: 1rem;
+  }
+  .b2c .biz-price { color: var(--blue-bright); }
+  .b2b .biz-price { color: var(--accent); }
+  .biz-list { list-style: none; }
+  .biz-list li {
+    display: flex; align-items: flex-start; gap: 8px;
+    color: var(--muted); font-size: 0.88rem;
+    padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(148,163,184,0.08);
+  }
+  .biz-list li::before { content: '→'; color: var(--blue-bright); flex-shrink: 0; font-size: 0.8rem; margin-top: 2px; }
+
+  /* ── MARKET ── */
+  .market-row {
+    display: flex; gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 14px; overflow: hidden;
+    margin-bottom: 3rem;
+  }
+  .market-tier {
+    flex: 1; padding: 2rem 1.5rem;
+    background: var(--navy2);
+    text-align: center;
+  }
+  .market-tier:first-child { background: rgba(37,99,235,0.12); }
+  .tam-label { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; font-weight: 700; }
+  .tam-num { font-family: 'Syne', sans-serif; font-size: 1.9rem; font-weight: 800; color: var(--white); line-height: 1; margin-bottom: 0.3rem; }
+  .tam-desc { color: var(--muted); font-size: 0.78rem; }
+
+  /* ── TEAM ── */
+  .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap: 1.5rem; }
+  .team-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 2rem 1.5rem;
+    text-align: center;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+  .team-card:hover { transform: translateY(-3px); border-color: rgba(59,130,246,0.3); }
+  .team-avatar {
+    width: 64px; height: 64px; border-radius: 50%;
+    margin: 0 auto 1rem;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 1.4rem; font-weight: 800;
+    color: var(--white);
+  }
+  .t1{background:linear-gradient(135deg,#2563eb,#7c3aed)}
+  .t2{background:linear-gradient(135deg,#059669,#0d9488)}
+  .t3{background:linear-gradient(135deg,#dc2626,#ea580c)}
+  .t4{background:linear-gradient(135deg,#7c3aed,#db2777)}
+  .team-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.25rem; }
+  .team-role { color: var(--blue-bright); font-size: 0.78rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .team-prev { color: var(--muted); font-size: 0.78rem; }
+
+  /* ── CTA ── */
+  .cta-section {
+    text-align: center;
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(37,99,235,0.2) 0%, transparent 70%);
+    border-top: 1px solid var(--border);
+  }
+  .cta-section h2 { font-size: clamp(2rem, 4vw, 3.4rem); margin-bottom: 1rem; }
+  .cta-section .section-sub { margin: 0 auto 2.5rem; }
+  .cta-group-center { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem; }
+  .investor-logos {
+    display: flex; gap: 2.5rem; justify-content: center; align-items: center;
+    flex-wrap: wrap;
+    opacity: 0.4;
+    font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 700;
+    color: var(--muted);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 2.5rem 5vw;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  footer .logo { font-size: 1rem; }
+  .footer-text { color: var(--muted); font-size: 0.8rem; }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a { color: var(--muted); font-size: 0.8rem; text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--white); }
+
+  /* ── FADE-IN ON SCROLL ── */
+  .fade-in {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+  .fade-delay-1 { transition-delay: 0.1s; }
+  .fade-delay-2 { transition-delay: 0.2s; }
+  .fade-delay-3 { transition-delay: 0.3s; }
+  .fade-delay-4 { transition-delay: 0.4s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav ul { display: none; }
+    .solution-layout { grid-template-columns: 1fr; }
+    .solution-visual { position: static; }
+    .biz-grid { grid-template-columns: 1fr; }
+    .quotes-row { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .hero-stats { gap: 1.5rem; }
+    h1 { font-size: 2.5rem; }
+    section { padding: 70px 5vw; }
+    .market-row { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo"><span class="logo-dot"></span> MobiFlow</div>
+  <ul>
+    <li><a href="#problem">Problem</a></li>
+    <li><a href="#solution">Solution</a></li>
+    <li><a href="#traction">Traction</a></li>
+    <li><a href="#market">Market</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#contact" class="nav-cta">Book a Call</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">Seed Round 2026 &nbsp;·&nbsp; $2M Raise</div>
+    <h1>
+      Your commute,<br><span class="accent">finally sorted.</span>
+      <span class="line2">₹50,000/year. 500 hours. Alone. There's a better way.</span>
+    </h1>
+    <p class="hero-sub">
+      MobiFlow uses AI to build <strong>WorkPods</strong> — recurring carpool groups of verified colleagues sharing the same route. Zero daily booking. 60% cost reduction. Launching Bengaluru, 2026.
+    </p>
+    <div class="cta-group">
+      <a href="#contact" class="btn-primary">Join the Waitlist ↗</a>
+      <a href="#solution" class="btn-secondary">▶ See How It Works</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num">80M</div>
+        <div class="hero-stat-label">Daily metro commuters in India</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">₹1,600</div>
+        <div class="hero-stat-label">Avg monthly commute spend</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">97 min</div>
+        <div class="hero-stat-label">Average daily commute time</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">0</div>
+        <div class="hero-stat-label">Good solutions. Until now.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem" id="problem">
+  <div class="section-label">The Problem</div>
+  <h2 class="fade-in">India's last-mile is broken.<br>And everyone knows it.</h2>
+  <p class="section-sub fade-in fade-delay-1">Metros solve the 30km problem. Nothing solves the 3km problem. The result: 80 million professionals start every day with a commute lottery.</p>
+  <div class="prob-grid">
+    <div class="prob-card fade-in fade-delay-1">
+      <div class="prob-num">₹50K</div>
+      <p class="prob-desc">Average annual commute spend for a Bengaluru IT professional. <strong>More than most spend on a European vacation.</strong> For a taxi to the metro.</p>
+    </div>
+    <div class="prob-card fade-in fade-delay-2">
+      <div class="prob-num">97 min</div>
+      <p class="prob-desc">Average daily commute time in Bengaluru. <strong>600+ hours per year.</strong> Spent alone, stressed, unproductive — not by choice.</p>
+    </div>
+    <div class="prob-card fade-in fade-delay-3">
+      <div class="prob-num">4.2×</div>
+      <p class="prob-desc">Surge multiplier during peak hours on Ola/Uber. <strong>The people who need affordable transport most get gouged the hardest.</strong> Every day.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section id="solution">
+  <div class="section-label">The Solution</div>
+  <h2 class="fade-in">WorkPods. Your commute,<br>on autopilot.</h2>
+  <p class="section-sub fade-in fade-delay-1">MobiFlow's AI engine identifies colleagues and neighbors with identical commute routes and auto-groups them into recurring ride-shares. Once matched, your WorkPod handles the rest — forever.</p>
+  <div class="solution-layout">
+    <div class="steps">
+      <div class="step fade-in">
+        <div class="step-num">01</div>
+        <div>
+          <div class="step-title">AI Matches Your WorkPod</div>
+          <p class="step-desc">Enter your home pin code, office address, and typical departure window. MobiFlow's matching engine (updated nightly) finds 3–5 verified colleagues or nearby professionals on your exact route. You approve the group once.</p>
+        </div>
+      </div>
+      <div class="step fade-in fade-delay-1">
+        <div class="step-num">02</div>
+        <div>
+          <div class="step-title">Calendar-Synced Scheduling</div>
+          <p class="step-desc">Connect your Google or Outlook calendar. MobiFlow auto-schedules pickups around your meetings. WFH day? The app notifies your pod automatically. No daily booking. No group chats about pickup times.</p>
+        </div>
+      </div>
+      <div class="step fade-in fade-delay-2">
+        <div class="step-num">03</div>
+        <div>
+          <div class="step-title">Verified, Safe, Auto-Billed</div>
+          <p class="step-desc">All members Aadhaar-verified. Drivers background-checked and rated. Live tracking shared with emergency contacts. UPI auto-split billing happens in the background. Fare fixed for 30 days — no surge, ever.</p>
+        </div>
+      </div>
+      <div class="step fade-in fade-delay-3">
+        <div class="step-num">04</div>
+        <div>
+          <div class="step-title">Your Pod Becomes Your Team</div>
+          <p class="step-desc">68% of beta users say their WorkPod became one of their closest professional relationships. The commute stops being dead time and becomes the 30-minute daily sync that remote work killed.</p>
+        </div>
+      </div>
+    </div>
+    <div class="solution-visual fade-in fade-delay-2">
+      <p style="font-size:0.72rem;color:var(--muted);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:1rem;">MobiFlow App Preview</p>
+      <div class="app-mockup">
+        <div class="mockup-header">
+          <span class="mockup-title">Your WorkPod</span>
+          <span class="mockup-badge">● ACTIVE</span>
+        </div>
+        <div class="workpod">
+          <div class="workpod-row">
+            <span class="workpod-name">Whitefield WorkPod #4</span>
+            <span class="fare-tag">₹80/ride</span>
+          </div>
+          <div class="workpod-route">Departs 8:42 AM · Mon–Fri</div>
+          <div class="members">
+            <div class="avatar a1">SS</div>
+            <div class="avatar a2">PK</div>
+            <div class="avatar a3">RM</div>
+            <div class="avatar a4">AN</div>
+            <div style="width:28px;height:28px;border-radius:50%;border:1.5px dashed rgba(148,163,184,0.3);display:flex;align-items:center;justify-content:center;font-size:0.6rem;color:var(--muted);">+1</div>
+          </div>
+          <div class="route-line">
+            <div class="route-dot"></div>
+            <div class="route-line-bar"></div>
+            <span>Whitefield Station</span>
+            <div class="route-line-bar"></div>
+            <div class="route-dot" style="background:var(--green)"></div>
+            <span>ITPL Main Gate</span>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:0.8rem 0;border-bottom:1px solid var(--border);margin-bottom:0.8rem;">
+          <span style="color:var(--muted);font-size:0.78rem;">Tomorrow, Aug 15 · 8:42 AM</span>
+          <span style="color:var(--green);font-size:0.72rem;font-weight:700;">✓ Confirmed</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;">
+          <div style="text-align:center;">
+            <div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--green)">₹80</div>
+            <div style="color:var(--muted);font-size:0.68rem;">Today's fare</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--blue-bright)">₹640</div>
+            <div style="color:var(--muted);font-size:0.68rem;">Saved this month</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--accent)">4.9★</div>
+            <div style="color:var(--muted);font-size:0.68rem;">Pod rating</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRACTION -->
+<section class="traction" id="traction">
+  <div class="section-label">Traction</div>
+  <h2 class="fade-in">200 users. 60% cheaper.<br>They're never going back.</h2>
+  <p class="section-sub fade-in fade-delay-1">6-month Bengaluru closed beta across 3 corporate campuses. Numbers we didn't expect this early.</p>
+  <div class="metrics-grid">
+    <div class="metric-card fade-in">
+      <div class="metric-num">200</div>
+      <div class="metric-label">Beta users (closed)</div>
+      <div class="metric-sub">↑ 3 corporate campuses</div>
+    </div>
+    <div class="metric-card fade-in fade-delay-1">
+      <div class="metric-num">60%</div>
+      <div class="metric-label">Avg commute cost reduction</div>
+      <div class="metric-sub">₹1,600 → ₹640/month</div>
+    </div>
+    <div class="metric-card fade-in fade-delay-2">
+      <div class="metric-num">4.8★</div>
+      <div class="metric-label">Average pod rating</div>
+      <div class="metric-sub">Zero safety incidents</div>
+    </div>
+    <div class="metric-card fade-in fade-delay-3">
+      <div class="metric-num">82%</div>
+      <div class="metric-label">30-day retention</div>
+      <div class="metric-sub">vs 34% industry avg</div>
+    </div>
+  </div>
+  <div class="quotes-row">
+    <div class="quote-card fade-in">
+      <p class="quote-text">"I haven't opened Ola in 4 months. My WorkPod runs itself. I've saved ₹8,000 since September and I actually look forward to my commute now — we do a quick standup in the car."</p>
+      <div class="quote-author">Priya K.</div>
+      <div class="quote-role">Senior Engineer, Infosys BPM · Whitefield beta user</div>
+    </div>
+    <div class="quote-card fade-in fade-delay-1">
+      <p class="quote-text">"We enrolled 60 employees in the MobiFlow pilot and saw a measurable drop in late arrivals. More importantly, inter-team relationships improved. This isn't just a commute tool — it's a culture tool."</p>
+      <div class="quote-author">Vikram S.</div>
+      <div class="quote-role">CHRO, Mphasis · Corporate Beta Partner</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARKET -->
+<section id="market">
+  <div class="section-label">Market Opportunity</div>
+  <h2 class="fade-in">₹42,000 Cr market.<br>Zero real solutions yet.</h2>
+  <p class="section-sub fade-in fade-delay-1">Urban mobility is a massive and growing market in India. Shared mobility is at 1% penetration — the same point ride-hailing was at in 2013.</p>
+  <div class="market-row fade-in">
+    <div class="market-tier">
+      <div class="tam-label">TAM</div>
+      <div class="tam-num">₹42,000 Cr</div>
+      <div class="tam-desc">Total urban commute spend, India's top 12 metros</div>
+    </div>
+    <div class="market-tier">
+      <div class="tam-label">SAM</div>
+      <div class="tam-num">₹8,400 Cr</div>
+      <div class="tam-desc">Metro-adjacent last-mile segment (0–8km daily trips)</div>
+    </div>
+    <div class="market-tier">
+      <div class="tam-label">SOM (Y3)</div>
+      <div class="tam-num">₹210 Cr</div>
+      <div class="tam-desc">2.5% SAM capture across Bengaluru + Delhi + Mumbai</div>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;" class="fade-in fade-delay-1">
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;">
+      <div style="color:var(--blue-bright);font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.5rem;">Why Now</div>
+      <p style="color:var(--muted);font-size:0.85rem;line-height:1.6;">UPI adoption at 95%. Aadhaar verification infrastructure mature. EV fleet economics viable. Post-COVID return-to-office creating fresh commute pain.</p>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;">
+      <div style="color:var(--accent);font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.5rem;">Why Us</div>
+      <p style="color:var(--muted);font-size:0.85rem;line-height:1.6;">Network density flywheel creates winner-take-all dynamics in each city corridor. Proprietary route-demand dataset is a durable competitive moat no newcomer can replicate.</p>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;">
+      <div style="color:var(--green);font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.5rem;">Why Not Ola/Uber</div>
+      <p style="color:var(--muted);font-size:0.85rem;line-height:1.6;">They are individual-ride maximizers. We are recurring-group optimizers. Fundamentally different demand model, unit economics, and retention mechanics. Not comparable products.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BUSINESS MODEL -->
+<section style="background:var(--navy2)" id="model">
+  <div class="section-label">Business Model</div>
+  <h2 class="fade-in">Two revenue engines.<br>Both with strong unit economics.</h2>
+  <p class="section-sub fade-in fade-delay-1">B2C network drives reach. B2B SaaS drives margins. Together they create an 8× LTV vs. pure consumer play.</p>
+  <div class="biz-grid">
+    <div class="biz-card b2c fade-in">
+      <span class="biz-tag">B2C Consumer</span>
+      <div class="biz-title">Per-Ride Commission</div>
+      <div class="biz-price">15%</div>
+      <ul class="biz-list">
+        <li>₹12 net per ride on ₹80 avg fare</li>
+        <li>Break-even at 1,500 daily rides (City 1)</li>
+        <li>Network effects compress CAC over time</li>
+        <li>No surge = high retention, low churn</li>
+        <li>Path to ₹25+ margin via driver efficiency</li>
+      </ul>
+    </div>
+    <div class="biz-card b2b fade-in fade-delay-1">
+      <span class="biz-tag">B2B SaaS</span>
+      <div class="biz-title">WorkPod Dashboard</div>
+      <div class="biz-price">₹150/emp</div>
+      <ul class="biz-list">
+        <li>Per employee per month (enrolled only)</li>
+        <li>ESG reporting for sustainability disclosures</li>
+        <li>HR productivity + commute analytics</li>
+        <li>90% gross margin — pure SaaS economics</li>
+        <li>Improves LTV 10× vs consumer-only model</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="section-label">The Team</div>
+  <h2 class="fade-in">Built by people who hated<br>their own commutes.</h2>
+  <p class="section-sub fade-in fade-delay-1">Combined experience across mobility, fintech, and consumer internet. We've been in the trenches — at companies that scaled, and some that didn't. We learned from both.</p>
+  <div class="team-grid">
+    <div class="team-card fade-in">
+      <div class="team-avatar t1">SS</div>
+      <div class="team-name">Sourabh Singh</div>
+      <div class="team-role">CEO & Co-founder</div>
+      <div class="team-prev">Ex-Ola Product (Growth), ISB PGP 2026. Built & scaled driver supply from 0→200K in South India.</div>
+    </div>
+    <div class="team-card fade-in fade-delay-1">
+      <div class="team-avatar t2">PK</div>
+      <div class="team-name">Priya Kumar</div>
+      <div class="team-role">CTO & Co-founder</div>
+      <div class="team-prev">Ex-Google Maps (Routing Infra), IIT-B CS. Built real-time matching systems at planet scale.</div>
+    </div>
+    <div class="team-card fade-in fade-delay-2">
+      <div class="team-avatar t3">RM</div>
+      <div class="team-name">Rohan Mehta</div>
+      <div class="team-role">Head of Growth</div>
+      <div class="team-prev">Ex-Zepto (City Launch Lead), XLRI. Launched 6 cities in 8 months. Knows how to win density wars.</div>
+    </div>
+    <div class="team-card fade-in fade-delay-3">
+      <div class="team-avatar t4">AN</div>
+      <div class="team-name">Ananya Nair</div>
+      <div class="team-role">Head of B2B / Partnerships</div>
+      <div class="team-prev">Ex-Razorpay (Enterprise Sales), IIM-A. Closed ₹40Cr+ in B2B contracts. Knows how HR buyers think.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="section-label">Seed Round · $2M</div>
+  <h2 class="fade-in">Let's fix India's commute<br>together.</h2>
+  <p class="section-sub fade-in fade-delay-1">We're raising a $2M seed round to launch in Bengaluru (Electronic City + Whitefield corridors), hire engineering, and begin corporate sales. 60% committed. Looking for 1–2 lead investors.</p>
+  <div class="cta-group-center fade-in fade-delay-2">
+    <a href="mailto:sourabh@mobiflow.in" class="btn-primary">Book a Call with Sourabh ↗</a>
+    <a href="#" class="btn-secondary" onclick="alert('Deck available on request — email sourabh@mobiflow.in')">Download Pitch Deck</a>
+  </div>
+  <div class="investor-logos fade-in fade-delay-3">
+    <span>YC S26 Applicant</span>
+    <span>·</span>
+    <span>Surge Cohort 15 Interest</span>
+    <span>·</span>
+    <span>Elevation Capital Intro</span>
+    <span>·</span>
+    <span>Blume Ventures Pipeline</span>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo"><span class="logo-dot"></span> MobiFlow</div>
+  <div class="footer-text">© 2026 MobiFlow Technologies Pvt. Ltd. · Bengaluru, India</div>
+  <div class="footer-links">
+    <a href="mailto:sourabh@mobiflow.in">Contact</a>
+    <a href="#">Privacy</a>
+    <a href="#">LinkedIn</a>
+  </div>
+</footer>
+
+<script>
+  // Fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Nav background on scroll
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.background = window.scrollY > 40
+      ? 'rgba(13,27,42,0.97)'
+      : 'rgba(13,27,42,0.85)';
+  });
+</script>
+</body>
+</html>
